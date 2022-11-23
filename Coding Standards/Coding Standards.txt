@@ -1,0 +1,33 @@
+•File naming guidelines:-
+  1) the functions of any class in the nodeeditor package start with ClassNameFunc
+  2) files containing graphical representation (PyQt5 overridden classes) start with GraphicalClassName
+  3) files for window/widget start with (HomeWindow/HomeWidget)
+
+•Naming Standards (Coding guidelines) :-
+1) Classes: ClassName (CamelCase: Capitalize first letter of each word)
+2) Variable: 
+	    2.1) variable_name (Snake Case: lower_case_with_underscores)
+	    2.2) Constant name = ALL CAPITALIZED 
+3) Methods - Functions: myMethod - myFunction (mixedCase: smallize the first letter of the word)
+3) The constructor __init__ always contains all class variables for the entire class. This is helpful for new users, so they can just look at the constructor and read about all properties that class is using in one place. Nobody wants any surprises hidden in the code later
+4) NodeEditor uses custom callbacks and listeners. Methods for adding callback functions are usually named addXYListener
+5) custom events are usually named onXY
+6) methods named doXY usually do certain tasks and also take care of low level operations
+7)Classes always contain methods in this order:
+	1)  __init__
+	2)  python magic methods (i.e. __str__), setters and getters
+	3)  initXY functions
+	4)  listener functions
+	5)  NodeEditor event fuctions
+	6)  NodeEditor doXY and getXY helping functions
+	7)  Qt5 event functions
+	8)  other functions
+	9)  optionally overridden Qt paint method
+	10) serialize and deserialize methods at the end
+
+•More Info:-
+1) Prepending a single underscore (_) has some support for protecting module variables and functions (not included with import * from).
+2) Prepending a double underscore (__) to an instance variable or method effectively serves to make the variable or method private to its class (using name mangling).
+
+•Refrence:-
+https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html#:~:text=Class%20names%20should%20be%20nouns,such%20as%20URL%20or%20HTML).
