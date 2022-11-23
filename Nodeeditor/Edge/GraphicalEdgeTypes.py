@@ -31,12 +31,12 @@ class GraphicsEdgePathDirect(GraphicsEdgePathBase):
         :returns: ``QPainterPath`` of the direct line
         :rtype: ``QPainterPath``
         """
-        path = QPainterPath(QPointF(self.owner.posSource[0], self.owner.posSource[1]))
-        path.lineTo(self.owner.posDestination[0], self.owner.posDestination[1])
+        path = QPainterPath(QPointF(self.owner.start_pos[0], self.owner.start_pos[1]))
+        path.lineTo(self.owner.destination_pos[0], self.owner.destination_pos[1])
         return path
 
 
-class GraphicsEdgePathBezier(GraphicsEdgePathBase):
+class GraphicsEdgePathCurve(GraphicsEdgePathBase):
     """Cubic line connection Graphics Edge"""
     def calcPath(self) -> QPainterPath:
         """Calculate the cubic Bezier line connection with 2 control points
@@ -44,8 +44,8 @@ class GraphicsEdgePathBezier(GraphicsEdgePathBase):
         :returns: ``QPainterPath`` of the cubic Bezier line
         :rtype: ``QPainterPath``
         """
-        s = self.owner.posSource
-        d = self.owner.posDestination
+        s = self.owner.start_pos
+        d = self.owner.destination_pos
         dist = (d[0] - s[0]) * 0.5
 
         cpx_s = +dist
@@ -72,8 +72,8 @@ class GraphicsEdgePathBezier(GraphicsEdgePathBase):
                     )
                 ) * EDGE_CP_ROUNDNESS
 
-        path = QPainterPath(QPointF(self.owner.posSource[0], self.owner.posSource[1]))
-        path.cubicTo( s[0] + cpx_s, s[1] + cpy_s, d[0] + cpx_d, d[1] + cpy_d, self.owner.posDestination[0], self.owner.posDestination[1])
+        path = QPainterPath(QPointF(self.owner.start_pos[0], self.owner.start_pos[1]))
+        path.cubicTo(s[0] + cpx_s, s[1] + cpy_s, d[0] + cpx_d, d[1] + cpy_d, self.owner.destination_pos[0], self.owner.destination_pos[1])
 
         return path
 
@@ -92,8 +92,8 @@ class GraphicsEdgePathSquare(GraphicsEdgePathBase):
         :rtype: ``QPainterPath``
         """
 
-        s = self.owner.posSource
-        d = self.owner.posDestination
+        s = self.owner.start_pos
+        d = self.owner.destination_pos
 
         mid_x = s[0] + ((d[0] - s[0]) * self.handle_weight)
 

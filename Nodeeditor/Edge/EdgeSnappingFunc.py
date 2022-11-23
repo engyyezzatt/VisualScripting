@@ -5,22 +5,22 @@ A module containing the Edge Snapping functions which are used in :class:`~nodee
 
 
 from PyQt5.QtCore import QPointF, QRectF
-from nodeeditor.Graphics_socket import QDMGraphicsSocket
+from Nodeeditor.Socket.GraphicalSocket import DrawGraphicalSocket
 
 
-class EdgeSnapping():
+class AllEdgeSnappingFunctions():
     def __init__(self, grView: 'QGraphicsView', snapping_radius: float = 24):
         self.grView = grView
         self.grScene = self.grView.grScene
         self.edge_snapping_radius = snapping_radius
 
-    def getSnappedSocketItem(self, event: 'QMouseEvent') -> 'QDMGraphicsSocket':
+    def getSnappedSocketItem(self, event: 'QMouseEvent') -> 'DrawGraphicalSocket':
         """Returns :class:`~nodeeditor.node_graphics_socket.QDMGraphicsSocket` which we should snap to"""
-        scenepos = self.grView.mapToScene(event.pos())
-        grSocket, pos = self.getSnappedToSocketPosition(scenepos)
+        scene_pos = self.grView.mapToScene(event.pos())
+        grSocket, pos = self.getSnappedToSocketPosition(scene_pos)
         return grSocket
 
-    def getSnappedToSocketPosition(self, scenepos: QPointF) -> ('QDMGraphicsSocket', QPointF):
+    def getSnappedToSocketPosition(self, scenepos: QPointF) -> ('DrawGraphicalSocket', QPointF):
         """
         Returns grSocket and Scene position to nearest Socket or original position if no nearby Socket found
 
@@ -33,7 +33,7 @@ class EdgeSnapping():
             self.edge_snapping_radius * 2, self.edge_snapping_radius * 2
         )
         items = self.grScene.items(scanrect)
-        items = list(filter(lambda x: isinstance(x, QDMGraphicsSocket), items))
+        items = list(filter(lambda x: isinstance(x, DrawGraphicalSocket), items))
 
         if len(items) == 0:
             return None, scenepos

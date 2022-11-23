@@ -5,10 +5,10 @@ it will intersect that edge.
 """
 from PyQt5.QtWidgets import QGraphicsView
 from PyQt5.QtCore import QRectF
-from nodeeditor.Node_edge import Edge
+from Nodeeditor.Edge.EdgeFunc import AllEdgeFunctions
 
 
-class EdgeIntersect:
+class AllEdgeIntersectFunctions:
 
     def __init__(self, grView: "QGraphicsView"):
         self.grScene = grView.grScene
@@ -21,7 +21,7 @@ class EdgeIntersect:
         Initialize when we enter the state
 
         :param node: :class:`~nodeeditor.node_node.Node` which we started to drag
-        :type node: :class:`~nodeeditor.node_node.Node`
+        :type node: :class:`~nodeeditor.NodeFunc.AllNodeFunctions`
         """
         self.hoveredList = []
         self.draggedNode = node
@@ -71,9 +71,9 @@ class EdgeIntersect:
         self.grView.grScene.scene.history.storeHistory('Delete existing edge', setModified=True)
 
         new_node_socket_in = node.inputs[0]
-        Edge(self.grScene.scene, socket_start, new_node_socket_in, edge_type=edge_type)
+        AllEdgeFunctions(self.grScene.scene, socket_start, new_node_socket_in, edge_type=edge_type)
         new_node_socket_out = node.outputs[0]
-        Edge(self.grScene.scene, new_node_socket_out, socket_end, edge_type=edge_type)
+        AllEdgeFunctions(self.grScene.scene, new_node_socket_out, socket_end, edge_type=edge_type)
 
         self.grView.grScene.scene.history.storeHistory('Created new edges by dropping node', setModified=True)
 
@@ -83,7 +83,7 @@ class EdgeIntersect:
         Returns A QRectF of creating a box around a node
 
         :param node: :class:`~nodeeditor.node_node.Node` for which we want to get `QRectF` describing its position and area
-        :type node: :class:`~nodeeditor.node_node.Node`
+        :type node: :class:`~nodeeditor.NodeFunc.AllNodeFunctions`
         :return: `QRectF` describing node's position and area
         :rtype: `QRectF`
         """
@@ -113,7 +113,7 @@ class EdgeIntersect:
                 self.hoveredList.append(grItem)
                 grItem.hovered = True
 
-    def intersect(self, node_box: 'QRectF') -> 'Edge':
+    def intersect(self, node_box: 'QRectF') -> 'AllEdgeFunctions':
         """
         Checking for intersection of a rectangle (usually a `Node`) with edges in the scene
 
@@ -134,7 +134,7 @@ class EdgeIntersect:
         Return ``True`` if node got any connections
 
         :param node: :class:`~nodeeditor.node_node.Node` which connections to check
-        :type node: :class:`~nodeeditor.node_node.Node`
+        :type node: :class:`~nodeeditor.NodeFunc.AllNodeFunctions`
         :return:
         """
         # Nodes with only inputs or outputs are excluded
