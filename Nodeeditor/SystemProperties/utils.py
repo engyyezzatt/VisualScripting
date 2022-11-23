@@ -5,8 +5,6 @@ Module with some helper functions
 from PyQt5.QtCore import QFile
 from PyQt5.QtWidgets import QApplication
 
-from nodeeditor.utils_no_qt import pp, dumpException
-
 
 def loadStylesheet(filename: str):
     """
@@ -20,6 +18,7 @@ def loadStylesheet(filename: str):
     file.open(QFile.ReadOnly | QFile.Text)
     stylesheet = file.readAll()
     QApplication.instance().setStyleSheet(str(stylesheet, encoding='utf-8'))
+
 
 def loadStylesheets(*args):
     """

@@ -2,15 +2,15 @@
 """
 A module containing the Edge Dragging functionality
 """
-from Nodeeditor.Graphics_socket import QDMGraphicsSocket
-from Nodeeditor.Node_edge import EDGE_TYPE_DEFAULT
-from Nodeeditor.utils import dumpException
+from Nodeeditor.Socket.GraphicalSocket import DrawGraphicalSocket
+from Nodeeditor.Edge.EdgeFunc import EDGE_TYPE_DEFAULT
+from Nodeeditor.SystemProperties.utils_no_qt import dumpException
 
 
 DEBUG = False
 
 
-class EdgeDragging:
+class AllEdgeDraggingFunctions:
     def __init__(self, grView:'QGraphicsView'):
         self.grView = grView
         # initializing these variable to know we're using them in this class...
@@ -57,7 +57,7 @@ class EdgeDragging:
         """
 
         # early out - clicked on something else than Socket
-        if not isinstance(item, QDMGraphicsSocket):
+        if not isinstance(item, DrawGraphicalSocket):
             self.grView.resetMode()
             if DEBUG: print('View::edgeDragEnd ~ End dragging edge early')
             self.drag_edge.remove(silent=True)      # don't notify sockets about removing drag_edge
@@ -65,7 +65,7 @@ class EdgeDragging:
 
 
         # clicked on socket
-        if isinstance(item, QDMGraphicsSocket):
+        if isinstance(item, DrawGraphicalSocket):
 
             # check if edge would be valid
             if not self.drag_edge.validateEdge(self.drag_start_socket, item.socket):

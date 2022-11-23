@@ -7,7 +7,7 @@ A module containing the Edge Rerouting functionality
 DEBUG_REROUTING = True
 
 
-class EdgeRerouting:
+class AllEdgeReroutingFunctions:
     def __init__(self, grView: 'QGraphicsView'):
         self.grView = grView
         self.start_socket = None        # store where we started re-routing the edges
