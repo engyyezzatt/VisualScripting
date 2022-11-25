@@ -48,15 +48,15 @@ class DrawGraphicalScene(QGraphicsScene):
         self.color_background = QColor("#283448")
         self.setBackgroundBrush(self.color_background)
 
-        self.color_light = QColor("#2f4155")
+        self.color_light = QColor("#2f4155")#2f4155
         self.pen_light = QPen(self.color_light)
         self.pen_light.setWidth(1)
 
-        self.color_dark = QColor("#cdcdcd")
+        self.color_dark = QColor("#2f4155")#cdcdcd
         self.pen_dark = QPen(self.color_dark)
         self.pen_dark.setWidth(2)
 
-        self.color_state = QColor("#ccc")
+        self.color_state = QColor("#ccc") ###ccc
         self.pen_state = QPen(self.color_state)
         self.font_state = QFont("Ubuntu", 16)
 

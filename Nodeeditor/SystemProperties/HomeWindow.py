@@ -3,8 +3,9 @@
 A module containing the Main Window class
 """
 import os, json
-from PyQt5.QtCore import QSize, QSettings, QPoint
-from PyQt5.QtWidgets import QMainWindow, QLabel, QAction, QMessageBox, QFileDialog, QApplication
+from PyQt5.QtCore import QSize, QSettings, QPoint , QEvent
+from PyQt5.QtWidgets import QMainWindow, QLabel, QAction, QMessageBox, QFileDialog, QApplication , QMenu , qApp
+
 
 from Nodeeditor.SystemProperties.HomeWidget import NodeEditorWidget
 from Nodeeditor.SystemProperties.SceneFunc import AllSceneFunctions
@@ -302,3 +303,54 @@ class NodeEditorWindow(QMainWindow):
     #     node1.setpos(-350, -250)
     #     node2.setpos(-75, 0)
     #     node3.setpos(200, -150)
+
+
+    # def CreateManu(self, event):
+    #
+    #     Menu = QMenu(self)
+    #
+    #     add = Menu.addAction(" + add ")
+    #     sub = Menu.addAction(" - sub ")
+    #     mult = Menu.addAction(" × mult ")
+    #     div = Menu.addAction(" ÷ div ")
+    #
+    #
+    #     action = Menu.exec_(self.mapToGlobal(event.pos()))
+    #
+    #     if action == add:
+    #         self.close()
+    #
+    # def eventFilter(self, source, event):
+    #     if event.type() == QEvent.ContextMenu and source is self.my_button:
+    #         menu = QMenu()
+    #
+    #         action1 = menu.addAction("Option 1")
+    #         action2 = menu.addAction("Option 2")
+    #         action3 = menu.addAction("Option 3")
+    #
+    #         selected_action = menu.exec_(event.globalPos())
+    #
+    #
+
+    def contextMenuEvent(self, event):
+        cmenu = QMenu(self)
+
+        add = cmenu.addAction(" + add")
+        sub = cmenu.addAction(" - sub")
+        mult = cmenu.addAction(" × mult")
+        div = cmenu.addAction(" ÷ div")
+        action = cmenu.exec_(self.mapToGlobal(event.pos()))
+
+        if action == add:
+            qApp.quit()
+
+
+
+
+
+
+
+
+
+
+
