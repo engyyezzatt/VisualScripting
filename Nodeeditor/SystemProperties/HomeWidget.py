@@ -162,6 +162,9 @@ class NodeEditorWidget(QWidget):
         edge2 = AllEdgeFunctions(self.scene, node2.outputs[0], node3.inputs[0], edge_type=3)
         edge3 = AllEdgeFunctions(self.scene, node1.outputs[0], node3.inputs[2], edge_type=3)
 
+        # node = AllNodeFunctions(self.scene, "Node", inputs=[2, 2, 2], outputs=[1])
+
+
         self.scene.history.storeInitialHistoryStamp()
 
     def addCustomNode(self):
