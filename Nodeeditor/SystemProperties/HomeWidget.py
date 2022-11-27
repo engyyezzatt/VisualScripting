@@ -11,6 +11,7 @@ from Nodeeditor.Node.NodeFunc import AllNodeFunctions
 from Nodeeditor.Edge.EdgeFunc import AllEdgeFunctions
 from Nodeeditor.SystemProperties.GraphicalView import DrawGraphicalView
 from Nodeeditor.SystemProperties.utils_no_qt import dumpException
+from Nodeeditor.Node.Calc_Node import *
 
 
 class NodeEditorWidget(QWidget):
@@ -185,14 +186,12 @@ class NodeEditorWidget(QWidget):
 
         print("node content:", node.content)
 
-
-# Functions to Draw node by press right click
+ # Functions to Draw node by press right click
     def addNode(self, pos):
         node = AllNodeFunctions(self.scene, "Addition", inputs=[0, 0], outputs=[1])
 
-
     def subNode(self):
-        node = AllNodeFunctions(self.scene, "Subtraction", inputs=[0, 0], outputs=[1])
+        node = CalcNode(self.scene,op_code=0,op_title= "New Sub" , inputs=[0], outputs=[1])
 
     def divNode(self):
         node = AllNodeFunctions(self.scene, "Division", inputs=[0, 0], outputs=[1])
@@ -205,9 +204,6 @@ class NodeEditorWidget(QWidget):
 
     def outNode(self):
         node = AllNodeFunctions(self.scene, "Output", inputs=[0, 0], outputs=[1])
-
-
-
 
     def contextMenuEvent(self, event):
         cmenu = QMenu(self)
@@ -235,6 +231,7 @@ class NodeEditorWidget(QWidget):
             self.inpNode()
         elif action == out:
             self.outNode()
+
 
 # def addDebugContent(self):
     #     """Testing method to put random QGraphicsItems and elements into QGraphicsScene"""

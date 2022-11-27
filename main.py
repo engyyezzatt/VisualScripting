@@ -7,6 +7,7 @@ from Nodeeditor.SystemProperties.utils import loadStylesheet
 from Nodeeditor.SystemProperties.HomeWindow import NodeEditorWindow
 
 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
