@@ -3,11 +3,14 @@
 A module containing the Main Window class
 """
 import os, json
-from PyQt5.QtCore import QSize, QSettings, QPoint
-from PyQt5.QtWidgets import QMainWindow, QLabel, QAction, QMessageBox, QFileDialog, QApplication
+from PyQt5.QtCore import QSize, QSettings, QPoint , QEvent
+from PyQt5.QtWidgets import QMainWindow, QLabel, QAction, QMessageBox, QFileDialog, QApplication , QMenu , qApp
 
+from Nodeeditor.Edge.EdgeFunc import AllEdgeFunctions
+from Nodeeditor.Node.NodeFunc import AllNodeFunctions
 from Nodeeditor.SystemProperties.HomeWidget import NodeEditorWidget
 from Nodeeditor.SystemProperties.SceneFunc import AllSceneFunctions
+
 
 
 class NodeEditorWindow(QMainWindow):
@@ -18,7 +21,6 @@ class NodeEditorWindow(QMainWindow):
     def __init__(self):
         """
         :Instance Attributes:
-
         - **name_company** - name of the company, used for permanent profile settings
         - **name_product** - name of this App, used for permanent profile settings
         """
@@ -121,7 +123,6 @@ class NodeEditorWindow(QMainWindow):
 
     def isModified(self) -> bool:
         """Has current :class:`~nodeeditor.node_scene.Scene` been modified?
-
         :return: ``True`` if current :class:`~nodeeditor.node_scene.Scene` has been modified
         :rtype: ``bool``
         """
@@ -130,7 +131,6 @@ class NodeEditorWindow(QMainWindow):
 
     def getCurrentNodeEditorWidget(self) -> NodeEditorWidget:
         """get current :class:`~nodeeditor.node_editor_widget`
-
         :return: get current :class:`~nodeeditor.node_editor_widget`
         :rtype: :class:`~nodeeditor.node_editor_widget`
         """
@@ -139,7 +139,6 @@ class NodeEditorWindow(QMainWindow):
     def maybeSave(self) -> bool:
         """If current `Scene` is modified, ask a dialog to save the changes. Used before
         closing window / mdi child document
-
         :return: ``True`` if we can continue in the `Close Event` and shutdown. ``False`` if we should cancel
         :rtype: ``bool``
         """
@@ -160,7 +159,6 @@ class NodeEditorWindow(QMainWindow):
 
     def onScenePosChanged(self, x: int, y: int):
         """Handle event when cursor position changed on the `Scene`
-
         :param x: new cursor x position
         :type x:
         :param y: new cursor y position
@@ -302,3 +300,31 @@ class NodeEditorWindow(QMainWindow):
     #     node1.setpos(-350, -250)
     #     node2.setpos(-75, 0)
     #     node3.setpos(200, -150)
+
+
+    # def CreateManu(self, event):
+    #
+    #     Menu = QMenu(self)
+    #
+    #     add = Menu.addAction(" + add ")
+    #     sub = Menu.addAction(" - sub ")
+    #     mult = Menu.addAction(" × mult ")
+    #     div = Menu.addAction(" ÷ div ")
+    #
+    #
+    #     action = Menu.exec_(self.mapToGlobal(event.pos()))
+    #
+    #     if action == add:
+    #         self.close()
+    #
+    # def eventFilter(self, source, event):
+    #     if event.type() == QEvent.ContextMenu and source is self.my_button:
+    #         menu = QMenu()
+    #
+    #         action1 = menu.addAction("Option 1")
+    #         action2 = menu.addAction("Option 2")
+    #         action3 = menu.addAction("Option 3")
+    #
+    #         selected_action = menu.exec_(event.globalPos())
+    #
+    #

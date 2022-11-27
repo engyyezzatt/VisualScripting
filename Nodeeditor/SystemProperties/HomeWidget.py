@@ -4,7 +4,7 @@ A module containing ``NodeEditorWidget`` class
 """
 import os
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QMessageBox, QLabel, QGraphicsItem
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QMessageBox, QLabel, QGraphicsItem, QMenu, qApp
 
 from Nodeeditor.SystemProperties.SceneFunc import AllSceneFunctions, InvalidFile
 from Nodeeditor.Node.NodeFunc import AllNodeFunctions
@@ -23,9 +23,7 @@ class NodeEditorWidget(QWidget):
         """
         :param parent: parent widget
         :type parent: ``QWidget``
-
         :Instance Attributes:
-
         - **filename** - currently graph's filename or ``None``
         """
         super().__init__(parent)
@@ -50,7 +48,6 @@ class NodeEditorWidget(QWidget):
 
     def isModified(self) -> bool:
         """Has the `Scene` been modified?
-
         :return: ``True`` if the `Scene` has been modified
         :rtype: ``bool``
         """
@@ -58,7 +55,6 @@ class NodeEditorWidget(QWidget):
 
     def isFilenameSet(self) -> bool:
         """Do we have a graph loaded from file or are we creating a new one?
-
         :return: ``True`` if filename is set. ``False`` if it is a new graph not yet saved to a file
         :rtype: ''bool''
         """
@@ -66,7 +62,6 @@ class NodeEditorWidget(QWidget):
 
     def getSelectedItems(self) -> list:
         """Shortcut returning `Scene`'s currently selected items
-
         :return: list of ``QGraphicsItems``
         :rtype: list[QGraphicsItem]
         """
@@ -74,7 +69,6 @@ class NodeEditorWidget(QWidget):
 
     def hasSelectedItems(self) -> bool:
         """Is there something selected in the :class:`nodeeditor.node_scene.Scene`?
-
         :return: ``True`` if there is something selected in the `Scene`
         :rtype: ``bool``
         """
@@ -82,7 +76,6 @@ class NodeEditorWidget(QWidget):
 
     def canUndo(self) -> bool:
         """Can Undo be performed right now?
-
         :return: ``True`` if we can undo
         :rtype: ``bool``
         """
@@ -90,7 +83,6 @@ class NodeEditorWidget(QWidget):
 
     def canRedo(self) -> bool:
         """Can Redo be performed right now?
-
         :return: ``True`` if we can redo
         :rtype: ``bool``
         """
@@ -98,7 +90,6 @@ class NodeEditorWidget(QWidget):
 
     def getUserFriendlyFilename(self) -> str:
         """Get user friendly filename. Used in the window title
-
         :return: just a base name of the file or `'New Graph'`
         :rtype: ``str``
         """
@@ -114,7 +105,6 @@ class NodeEditorWidget(QWidget):
 
     def fileLoad(self, filename: str):
         """Load serialized graph from JSON file
-
         :param filename: file to load
         :type filename: ``str``
         """
@@ -139,7 +129,6 @@ class NodeEditorWidget(QWidget):
 
     def fileSave(self, filename: str = None):
         """Save serialized graph to JSON file. When called with an empty parameter, we won't store/remember the filename.
-
         :param filename: file to store the graph
         :type filename: ``str``
         """
@@ -149,20 +138,24 @@ class NodeEditorWidget(QWidget):
         QApplication.restoreOverrideCursor()
         return True
 
-    def addNodes(self):
-        """Testing method to create 3 `Nodes` with 3 `Edges` connecting them"""
-        node1 = AllNodeFunctions(self.scene, "My Awesome Node 1", inputs=[0, 0, 0], outputs=[1, 5])
-        node2 = AllNodeFunctions(self.scene, "My Awesome Node 2", inputs=[3, 3, 3], outputs=[1])
-        node3 = AllNodeFunctions(self.scene, "My Awesome Node 3", inputs=[2, 2, 2], outputs=[1])
-        node1.setPos(-350, -250)
-        node2.setPos(-75, 0)
-        node3.setPos(200, -200)
+    # def addNodes(self):
+    #     """Testing method to create 3 `Nodes` with 3 `Edges` connecting them"""
+    #     node1 = AllNodeFunctions(self.scene, "My Awesome Node 1", inputs=[0, 0, 0], outputs=[1, 5])
+    #     node2 = AllNodeFunctions(self.scene, "My Awesome Node 2", inputs=[3, 3, 3], outputs=[1])
+    #     node3 = AllNodeFunctions(self.scene, "My Awesome Node 3", inputs=[2, 2, 2], outputs=[1])
+    #     node1.setPos(-350, -250)
+    #     node2.setPos(-75, 0)
+    #     node3.setPos(200, -200)
+    #
+    #     edge1 = AllEdgeFunctions(self.scene, node1.outputs[0], node2.inputs[0], edge_type=1)
+    #     edge2 = AllEdgeFunctions(self.scene, node2.outputs[0], node3.inputs[0], edge_type=3)
+    #     edge3 = AllEdgeFunctions(self.scene, node1.outputs[0], node3.inputs[2], edge_type=3)
+    #
+    #     # node = AllNodeFunctions(self.scene, "Node", inputs=[2, 2, 2], outputs=[1])
+    #
+    #
+    #     self.scene.history.storeInitialHistoryStamp()
 
-        edge1 = AllEdgeFunctions(self.scene, node1.outputs[0], node2.inputs[0], edge_type=1)
-        edge2 = AllEdgeFunctions(self.scene, node2.outputs[0], node3.inputs[0], edge_type=3)
-        edge3 = AllEdgeFunctions(self.scene, node1.outputs[0], node3.inputs[2], edge_type=3)
-
-        self.scene.history.storeInitialHistoryStamp()
 
     def addCustomNode(self):
         """Testing method to create a custom Node with custom content"""
@@ -181,7 +174,58 @@ class NodeEditorWidget(QWidget):
 
         print("node content:", node.content)
 
-    # def addDebugContent(self):
+
+# Functions to Draw node by press right click
+    def addNode(self, pos):
+        node = AllNodeFunctions(self.scene, "Addition", inputs=[0, 0], outputs=[1])
+
+
+    def subNode(self):
+        node = AllNodeFunctions(self.scene, "Subtraction", inputs=[0, 0], outputs=[1])
+
+    def divNode(self):
+        node = AllNodeFunctions(self.scene, "Division", inputs=[0, 0], outputs=[1])
+
+    def multNode(self):
+        node = AllNodeFunctions(self.scene, "Multiplication", inputs=[0, 0], outputs=[1])
+
+    def inpNode(self):
+        node = AllNodeFunctions(self.scene, "Input", inputs=[0, 0], outputs=[1])
+
+    def outNode(self):
+        node = AllNodeFunctions(self.scene, "Output", inputs=[0, 0], outputs=[1])
+
+
+
+
+    def contextMenuEvent(self, event):
+        cmenu = QMenu(self)
+
+        add = cmenu.addAction(" + add")
+        sub = cmenu.addAction(" - sub")
+        mult = cmenu.addAction(" × mult")
+        div = cmenu.addAction(" ÷ div")
+        inp = cmenu.addAction("Input")
+        out = cmenu.addAction("Output")
+        pos = self.mapToGlobal(event.pos())
+        action = cmenu.exec_(pos)
+
+        if action == add:
+            self.addNode(pos)
+            # self.addNodes()
+            # self.mapToGlobal(event.pos())
+        elif action == sub:
+            self.subNode()
+        elif action == mult:
+            self.multNode()
+        elif action == div:
+            self.divNode()
+        elif action == inp:
+            self.inpNode()
+        elif action == out:
+            self.outNode()
+
+# def addDebugContent(self):
     #     """Testing method to put random QGraphicsItems and elements into QGraphicsScene"""
     #     greenBrush = QBrush(Qt.green)
     #     outlinePen = QPen(Qt.black)
