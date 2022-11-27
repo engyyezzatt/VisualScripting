@@ -6,6 +6,7 @@ import os, json
 from PyQt5.QtCore import QSize, QSettings, QPoint , QEvent
 from PyQt5.QtWidgets import QMainWindow, QLabel, QAction, QMessageBox, QFileDialog, QApplication , QMenu , qApp
 
+from Nodeeditor.Edge.EdgeFunc import AllEdgeFunctions
 from Nodeeditor.Node.NodeFunc import AllNodeFunctions
 from Nodeeditor.SystemProperties.HomeWidget import NodeEditorWidget
 from Nodeeditor.SystemProperties.SceneFunc import AllSceneFunctions
@@ -332,55 +333,8 @@ class NodeEditorWindow(QMainWindow):
     #         selected_action = menu.exec_(event.globalPos())
     #
     #
-    def addNodes(self):
-
-        node = AllNodeFunctions(self.myScene, "Node", inputs=[2, 2, 2], outputs=[1])
-
-        self.myScene.history.storeInitialHistoryStamp()
 
 
-
-    def contextMenuEvent(self, event):
-        cmenu = QMenu(self)
-
-        add = cmenu.addAction(" + add")
-        sub = cmenu.addAction(" - sub")
-        mult = cmenu.addAction(" × mult")
-        div = cmenu.addAction(" ÷ div")
-        action = cmenu.exec_(self.mapToGlobal(event.pos()))
-
-        if action == add:
-            # self.addNodes()
-            # self.mapToGlobal(event.pos())
-            qApp.quit()
-
-
-        elif action == sub:
-            qApp.quit()
-
-        elif action == mult:
-            qApp.quit()
-
-        elif action == div:
-            qApp.quit()
-
-
-
-            # node = AllNodeFunctions(self.myScene, "Node", inputs=[2, 2, 2], outputs=[1])
-            # node_pos = self.myScene.getView().mapToScene(event.pos())
-            # node.setPos(node_pos.x() , node_pos.y())
-
-
-           # node = self.addNodes()
-           # node_pos = self.scene.getView().mapToScene(event.pos())
-           # node.setPos(node_pos.x() , node_pos.y())
-
-
-
-
-
-            # node = AllNodeFunctions(self.scene, "Node", inputs=[2, 2, 2], outputs=[1])
-            # node.setPos(event.pos())
 
 
 
